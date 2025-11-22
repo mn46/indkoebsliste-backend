@@ -5,6 +5,12 @@ const cors = require("cors");
 const app = express();
 app.use(cors());
 
+// parse requests of content-type - application/json
+app.use(bodyParser.json());
+
+// parse requests of content-type - application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to indkoebsliste application." });
 });
