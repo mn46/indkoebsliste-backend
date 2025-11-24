@@ -19,6 +19,14 @@ exports.create = async (req, res) => {
     return;
   }
 
+  const userExists = await User.findOne({
+    where: { userName },
+  });
+
+  if (userExists) {
+    return res.status(400).send("User name is already taken.");
+  }
+
   const hashedPassword = await bcrypt.hash(req.body.userPassword, 15);
 
   const user = {
