@@ -1,9 +1,10 @@
+const bcrypt = require("bcrypt");
 const db = require("../models");
 const User = db.users;
 const Op = db.Sequelize.Op;
 
 // create a new user
-exports.create = (req, res) => {
+exports.create = async (req, res) => {
   if (!req.body.userName) {
     res.status(400).send({
       message: "User name can not be empty.",
@@ -18,9 +19,11 @@ exports.create = (req, res) => {
     return;
   }
 
+  const hashedPassword = await bcrypt.hash(req.body.userPassword, 15);
+
   const user = {
     userName: req.body.userName,
-    userPassword: req.body.userPassword,
+    userPassword: hashedPassword,
   };
 
   User.create(user)
