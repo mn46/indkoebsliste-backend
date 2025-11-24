@@ -4,7 +4,7 @@ module.exports = (app) => {
   let router = require("express").Router();
 
   // create a user
-  router.post("/", userController.create);
+  router.post("/sign-up", userController.create);
 
   app.use("/api/users", router);
 };
