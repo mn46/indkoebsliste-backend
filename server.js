@@ -15,6 +15,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const db = require("./app/models");
 db.sequelize.sync();
 
+// routes
+require("./app/routes/user.routes")(app);
+
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to indkoebsliste application." });
 });
