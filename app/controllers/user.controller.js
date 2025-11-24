@@ -19,6 +19,8 @@ exports.create = async (req, res) => {
     return;
   }
 
+  const userName = req.body.userName;
+
   const userExists = await User.findOne({
     where: { userName },
   });
@@ -30,7 +32,7 @@ exports.create = async (req, res) => {
   const hashedPassword = await bcrypt.hash(req.body.userPassword, 15);
 
   const user = {
-    userName: req.body.userName,
+    userName: userName,
     userPassword: hashedPassword,
   };
 
