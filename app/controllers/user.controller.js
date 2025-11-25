@@ -35,6 +35,7 @@ exports.create = async (req, res) => {
   const user = {
     userName: userName,
     userPassword: hashedPassword,
+    userRole: req.body.userRole || "reader",
   };
 
   User.create(user)
@@ -77,6 +78,7 @@ exports.signIn = async (req, res) => {
   res.status(200).send({
     userId: foundUser.id,
     userName: foundUser.userName,
+    userRole: foundUser.userRole,
     accessToken: token,
   });
 };
