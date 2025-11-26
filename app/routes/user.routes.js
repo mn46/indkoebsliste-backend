@@ -9,5 +9,8 @@ module.exports = (app) => {
   // sign in user
   router.post("/sign-in", userController.signIn);
 
+  // get one user
+  router.get("/:id", userController.findOne);
+
   app.use("/api/users", router);
 };

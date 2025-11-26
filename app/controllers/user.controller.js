@@ -82,3 +82,23 @@ exports.signIn = async (req, res) => {
     accessToken: token,
   });
 };
+
+exports.findOne = (req, res) => {
+  const id = req.params.id;
+
+  User.findByPk(id)
+    .then((data) => {
+      if (data) {
+        res.send(data);
+      } else {
+        res.status(404).send({
+          message: `Cannot find users with id=${id}.`,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Error retrieving users with id=" + id,
+      });
+    });
+};
