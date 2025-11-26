@@ -27,6 +27,11 @@ app.get("/", (req, res) => {
 app.use(cookieParser());
 
 const authenticateToken = (req, res, next) => {
+  // exclude login and sign up routes from jwt validation
+
+  if (req.path.includes("sign-in") || req.path.includes("sign-up"))
+    return next();
+
   const token = req.cookies.token;
   if (!token) return res.status(401).json("No token was provided.");
 
